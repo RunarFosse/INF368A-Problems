@@ -17,7 +17,7 @@ class MAB():
 
 
 class EpsilonGreedy(MAB):
-    def __init__(self, epsilon=0.1, alpha=1, actions=3):
+    def __init__(self, epsilon=0.3, alpha=1, actions=3):
         super().__init__()
 
         self.expected_reward = [ 1000 ] * actions
@@ -37,7 +37,7 @@ class EpsilonGreedy(MAB):
         
         return action
         
-    def update(self, action, reward, episode):
+    def update(self, action, reward):
         self.action_counters[action] += 1
-        self.expected_reward[action] += 1 / episode * (reward - self.expected_reward[action])
+        self.expected_reward[action] += (reward - self.expected_reward[action]) / self.action_counters[action]
         self.epsilon *= self.alpha
