@@ -37,7 +37,7 @@ class EpsilonGreedy(MAB):
         
         return action
         
-    def update(self, action, reward, timestep):
+    def update(self, action, reward, episode):
         self.action_counters[action] += 1
-        self.expected_reward[action] += 1 / timestep * (reward - self.expected_reward[action])
+        self.expected_reward[action] += 1 / episode * (reward - self.expected_reward[action])
         self.epsilon *= self.alpha
