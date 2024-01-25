@@ -41,3 +41,24 @@ class EpsilonGreedy(MAB):
         self.action_counters[action] += 1
         self.expected_reward[action] += (reward - self.expected_reward[action]) / self.action_counters[action]
         self.epsilon *= self.alpha
+
+
+class UCB(MAB):
+    def __init__(self, constant=1, actions=3):
+        super().__init__()
+
+        self.expected_reward = [ 1000 ] * actions
+        self.action_counters = [ 0 ] * actions
+        self.constant = constant
+        self.actions = actions
+
+    def sample(self, episode):
+        confidence_bounds = np.array([np.sqrt(2 * np.log(episode) / N_i) for N_i in self.action_counters])
+
+        action = np.argmax(np.array(self.expected_reward) + self.constant * confidence_bounds)
+
+        return action
+        
+    def update(self, action, reward):
+        self.action_counters[action] += 1
+        self.expected_reward[action] += (reward - self.expected_reward[action]) / self.action_counters[action]
