@@ -53,9 +53,10 @@ class UCB(MAB):
         self.actions = actions
 
     def sample(self, episode):
-        confidence_bounds = np.array([np.sqrt(2 * np.log(episode) / N_i) for N_i in self.action_counters])
+        # max(N_i, 1) prevents division by zero error
+        confidence_bounds = [np.sqrt(2 * np.log(episode) / max(N_i, 1)) for N_i in self.action_counters]
 
-        action = np.argmax(np.array(self.expected_reward) + self.constant * confidence_bounds)
+        action = np.argmax(np.array(self.expected_reward) + self.constant * np.array(confidence_bounds))
 
         return action
         
