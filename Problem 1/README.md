@@ -1,4 +1,4 @@
-# Code for problem assignment 1
+        # Code for problem assignment 1
 
 The environments for the problem assignment are provided in the file *bandits.py*. 
 
