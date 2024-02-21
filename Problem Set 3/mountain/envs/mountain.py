@@ -2,11 +2,8 @@ import numpy as np
 import pygame
 import gymnasium as gym
 from gymnasium import spaces
-<<<<<<< HEAD
 from typing import Tuple
-=======
 import os
->>>>>>> 9871b2573f5db3544961aeccdf3227b142c494ff
 
 
 class MountainEnv(gym.Env):
