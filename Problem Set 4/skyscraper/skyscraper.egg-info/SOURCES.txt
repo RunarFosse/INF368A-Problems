@@ -1,0 +1,8 @@
+setup.py
+envs/__init__.py
+envs/skyscraper.py
+skyscraper.egg-info/PKG-INFO
+skyscraper.egg-info/SOURCES.txt
+skyscraper.egg-info/dependency_links.txt
+skyscraper.egg-info/requires.txt
+skyscraper.egg-info/top_level.txt
