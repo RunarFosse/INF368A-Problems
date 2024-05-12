@@ -1,10 +1,12 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{subcaption}
 
 \title{\vspace{-5.0cm}Part 1 - Multi-Armed Bandits\vspace{-0.3cm}}
-\author{Årne, Runar and Lars\vspace{-0.5cm}}
+\author{Runar, Lars and Årne\vspace{-0.5cm}}
+\date{}
 
 \setlength{\oddsidemargin}{-25pt}
 \setlength{\textwidth}{525pt}
@@ -12,14 +14,13 @@
 \begin{document}
 
 \maketitle
-\vspace{-0.5cm}
+\vspace{-1.0cm}
 
-Recall the old scenario for evaluating the effectiveness of three medicines A, B, C to fight headache. Consider now the scenario where again we have to evaluate the effectiveness of three new medicines A, B, C in fighting headache. However, in the current case, the effect of the drugs we developed may change with time as the biological response to the medicine adapts across the population.
 \begin{enumerate}
 
 \item{How would this modified problem fit in the MAB or in the MDP formalism? What challenges arise in the current setting?}
 
-This modified problem would fit into the MAB formalism as there still exist no state, and we are trying to infer the expectation value of different actions. However, here the expectation value of the different medicines will change after time! Therefore, we are trying to compute a "moving target". This is a challenge, as an assumption of the MAB problem is that their expected value stays constant.
+This modified problem would fit into the MAB formalism as there still exist only one state, and we are trying to infer the expectation value of different actions. However, here the expectation value of the different medicines will change with time! Therefore, we are trying to compute a "moving target". This is a challenge, as an assumption of the MAB problem is that their expected value stays constant. Formalising using the MDP formalism we would get $\langle \mathcal{S} = \mathbb{I}, \mathcal{A} = \{A, B, C\}, \mathcal{R} = \{\mathcal{R}_A(t), \mathcal{R}_B(t), \mathcal{R}_C(t) \}, \mathcal{T} = \mathbb{I}, \gamma  \rangle$.
 
 \item{Assume your aim is still to minimize regret or maximize reward. How would you change or adapt a MAB algorithm to deal with this scenario in which you do not know when changes in effectiveness happen? Explain and justify your algorithmic choices. Describe assumptions and/or dependence of your solution on the parameters of the problem.}
 
@@ -34,14 +35,13 @@ The simplest solution would be to store a sliding window containing a fixed size
 We run the algorithm proposed above as a UCB, with different hyperparameters $\tau \in \{10, 25, 50, 100, 250\}$ for sliding window size, and compare it with the standard UCB (hypothetically $\tau = \infty$). The results are gathered from running 2500 episodes and averaging reward over 25 experiments.
 \\[10pt]
 From the plot (figure 1) we can see that the sliding window UCB algorithm significantly outperforms the standard version for every sliding window size $\tau$. The best performing model is the sliding window UCB with either $\tau = 50$ or $\tau = 100$ (their performance is very similar), and the worst performing model is the standard UCB.
-
-\end{enumerate}
-
-\begin{figure}
+\\[1pt]
+\begin{figure}[b!]
     \centering
-    \includegraphics[width=0.2\linewidth]{Final Assignment/UCB Comparison.png}
+    \includegraphics[height=2.0in]{Final Assignment/UCB Comparison.png}
     \caption{Comparison of different UCB on non-stationary problem}
 \end{figure}
 
+\end{enumerate}
 
 \end{document}
